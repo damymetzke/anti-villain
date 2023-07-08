@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://3wqmtb5iku23"]
+[gd_scene load_steps=3 format=3 uid="uid://3wqmtb5iku23"]
 
 [ext_resource type="TileSet" uid="uid://c87dqu80t4yq5" path="res://tiles/ground.tres" id="1_8p0nt"]
+[ext_resource type="PackedScene" uid="uid://dhcsraisjd3x7" path="res://scenes/character.tscn" id="2_ouerq"]
 
 [node name="Gym" type="Node2D"]
 
@@ -21,3 +22,8 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
+
+[node name="Character" parent="." instance=ExtResource("2_ouerq")]
+grid_x = 4
+grid_y = 5
+type = 1
