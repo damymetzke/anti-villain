@@ -58,6 +58,7 @@ func apply_monster_move(hero: Character):
 func apply_player_move(delta_x: int, delta_y: int):
   var moved = false
   var hero = null
+  var villain = null
 
   for character in characters:
     if not character.alive:
@@ -65,6 +66,9 @@ func apply_player_move(delta_x: int, delta_y: int):
 
     if character.type == TYPE.HERO:
       hero = character
+
+    if character.type == TYPE.VILLAIN:
+      villain = character
 
     if character.type != target:
       continue
@@ -84,6 +88,9 @@ func apply_player_move(delta_x: int, delta_y: int):
 
     character.move(delta_x, delta_y)
     moved = true
+
+  if hero.grid_position() == villain.grid_position():
+    LevelService.next_level()
 
   if moved:
     apply_monster_move(hero)

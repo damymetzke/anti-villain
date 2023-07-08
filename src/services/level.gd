@@ -25,3 +25,12 @@ var current = 0
 func reset():
   MoveService.reset()
   get_tree().change_scene_to_packed(LEVELS[current])
+
+func next_level():
+  current = current + 1
+  if current >= len(LEVELS):
+    print("Done!!!")
+    # TODO: Figure out what to do on a win
+    return
+
+  reset()
