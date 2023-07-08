@@ -30,6 +30,10 @@ func register_character(value: Character):
 func register_grid(value: TileMap):
   grid = value
 
+func reset():
+  characters = []
+  grid = null
+
 func apply_monster_move(hero: Character):
   for character in characters:
     if not character.alive:
@@ -49,8 +53,7 @@ func apply_monster_move(hero: Character):
     character.move(direction.x, direction.y)
 
     if character.grid_position() == hero.grid_position():
-      # TODO: trigger level reset
-      print("Hero died")
+      LevelService.reset()
 
 func apply_player_move(delta_x: int, delta_y: int):
   var moved = false

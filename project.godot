@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 MoveService="*res://src/services/move.gd"
 NavigateService="*res://src/services/navigate.gd"
+LevelService="*res://src/services/level.gd"
 
 [display]
 
