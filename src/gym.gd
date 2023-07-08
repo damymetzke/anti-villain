@@ -16,30 +16,7 @@
 
 extends Node2D
 
-# I'm not sure if I'm going to support all of these yet
-enum TYPE {HERO = 1, VILLAIN = 2, GUARD = 3, ELITE_GUARD = 4, CAPTAIN = 5, MONSTER = 6, SPRINTER = 7, TANK = 8}
-enum DIRECTION {UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4}
-
-@export
-var grid_x = 0
-@export
-var grid_y = 0
-
-@export
-var type = TYPE.GUARD
-
-func move(delta_x: int, delta_y: int):
-  grid_x += delta_x
-  grid_y += delta_y
-  position = Vector2(grid_x * 16, grid_y * 16)
-
-func x_with_offset(delta: int) -> int:
-  return grid_x + delta
-
-func y_with_offset(delta: int) -> int:
-  return grid_y + delta
 
 func _ready():
-  move(0, 0)
-  MoveService.register_character(self)
+    MoveService.register_grid(get_node("TileMap"))
 

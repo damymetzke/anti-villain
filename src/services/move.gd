@@ -22,13 +22,29 @@ enum TYPE {HERO = 1, VILLAIN = 2, GUARD = 3, ELITE_GUARD = 4, CAPTAIN = 5, MONST
 
 var characters: Array[Character] = []
 var target = TYPE.HERO
+var grid: TileMap
 
-func register_character(type: Character):
-  characters.push_back(type)
+func register_character(value: Character):
+  characters.push_back(value)
+
+func register_grid(value: TileMap):
+  grid = value
 
 func apply_player_move(delta_x: int, delta_y: int):
   for character in characters:
     if character.type != target:
+      continue
+
+    if not grid:
+      character.move(delta_x, delta_y)
+      continue
+
+    var x = character.x_with_offset(delta_x)
+    var y = character.y_with_offset(delta_y)
+
+    var data = grid.get_cell_tile_data(0, Vector2i(x, y))
+
+    if data.get_custom_data("solid"):
       continue
 
     character.move(delta_x, delta_y)
