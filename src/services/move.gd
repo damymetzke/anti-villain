@@ -32,12 +32,14 @@ func register_grid(value: TileMap):
 
 func apply_monster_move(hero: Character):
   for character in characters:
+    if not character.alive:
+      continue
+
     if character.type != TYPE.MONSTER:
       continue
 
     if character.grid_position() == hero.grid_position():
-      # TODO: Implement killing enemies
-      print("Enemy killed")
+      character.kill()
     var path = NavigateService.navigate(character.grid_position(), hero.grid_position(), grid)
 
     if len(path) < 2:
@@ -55,6 +57,9 @@ func apply_player_move(delta_x: int, delta_y: int):
   var hero = null
 
   for character in characters:
+    if not character.alive:
+      continue
+
     if character.type == TYPE.HERO:
       hero = character
 

@@ -28,6 +28,12 @@ var grid_y = 0
 @export
 var type = TYPE.GUARD
 
+var alive = true
+
+func kill():
+  alive = false
+  visible = false
+
 func grid_position() -> Vector2i:
   return Vector2i(grid_x, grid_y)
 
