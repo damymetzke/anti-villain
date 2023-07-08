@@ -42,4 +42,13 @@ func y_with_offset(delta: int) -> int:
 func _ready():
   move(0, 0)
   MoveService.register_character(self)
+  match type:
+    TYPE.HERO:
+      modulate = Color(0.4, 1, 0.4)
+    TYPE.VILLAIN:
+      modulate = Color(1, 0.4, 0.4)
+    TYPE.GUARD:
+      modulate = Color(0.4, 0.4, 1)
+    TYPE.MONSTER:
+      modulate = Color(1, 0.8, 0.4)
 

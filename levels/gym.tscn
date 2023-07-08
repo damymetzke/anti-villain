@@ -25,8 +25,25 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 
-[node name="Character" parent="." instance=ExtResource("2_ouerq")]
-position = Vector2(64, 80)
-grid_x = 4
-grid_y = 5
+[node name="Hero" parent="." instance=ExtResource("2_ouerq")]
+position = Vector2(48, 64)
+grid_x = 3
+grid_y = 4
 type = 1
+
+[node name="Villain" parent="." instance=ExtResource("2_ouerq")]
+position = Vector2(224, 144)
+grid_x = 14
+grid_y = 9
+type = 2
+
+[node name="Guard" parent="." instance=ExtResource("2_ouerq")]
+position = Vector2(80, 64)
+grid_x = 5
+grid_y = 4
+
+[node name="Monster" parent="." instance=ExtResource("2_ouerq")]
+position = Vector2(192, 144)
+grid_x = 12
+grid_y = 9
+type = 6

@@ -58,3 +58,9 @@ func _process(_delta):
     apply_player_move(0, 1)
   if Input.is_action_just_pressed("move_left"):
     apply_player_move(-1, 0)
+
+  if Input.is_action_just_pressed("toggle_character"):
+    if target == TYPE.HERO:
+      target = TYPE.VILLAIN
+    else:
+      target = TYPE.HERO
