@@ -30,6 +30,8 @@ var type = TYPE.GUARD
 
 var alive = true
 
+var sprite: AnimatedSprite2D
+
 func kill():
   alive = false
   visible = false
@@ -49,15 +51,19 @@ func y_with_offset(delta: int) -> int:
   return grid_y + delta
 
 func _ready():
+  sprite = get_node("Sprite")
+
   move(0, 0)
   MoveService.register_character(self)
   match type:
     TYPE.HERO:
-      modulate = Color(0.4, 1, 0.4)
+      sprite.sprite_frames = preload("res://spriteframes/hero.tres")
     TYPE.VILLAIN:
       modulate = Color(1, 0.4, 0.4)
     TYPE.GUARD:
       modulate = Color(0.4, 0.4, 1)
     TYPE.MONSTER:
       modulate = Color(1, 0.8, 0.4)
+
+  sprite.animation = "idle"
 

@@ -9,4 +9,4 @@ script = ExtResource("2_r4fj5")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(8, 0)
 sprite_frames = ExtResource("1_om0g0")
-animation = &"move_down"
+animation = &"idle"
