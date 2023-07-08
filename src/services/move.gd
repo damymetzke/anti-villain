@@ -30,13 +30,40 @@ func register_character(value: Character):
 func register_grid(value: TileMap):
   grid = value
 
-func apply_player_move(delta_x: int, delta_y: int):
+func apply_monster_move(hero: Character):
   for character in characters:
+    if character.type != TYPE.MONSTER:
+      continue
+
+    if character.grid_position() == hero.grid_position():
+      # TODO: Implement killing enemies
+      print("Enemy killed")
+    var path = NavigateService.navigate(character.grid_position(), hero.grid_position(), grid)
+
+    if len(path) < 2:
+      continue
+
+    var direction = path[1] - character.grid_position()
+    character.move(direction.x, direction.y)
+
+    if character.grid_position() == hero.grid_position():
+      # TODO: trigger level reset
+      print("Hero died")
+
+func apply_player_move(delta_x: int, delta_y: int):
+  var moved = false
+  var hero = null
+
+  for character in characters:
+    if character.type == TYPE.HERO:
+      hero = character
+
     if character.type != target:
       continue
 
     if not grid:
       character.move(delta_x, delta_y)
+      moved = true
       continue
 
     var x = character.x_with_offset(delta_x)
@@ -48,6 +75,10 @@ func apply_player_move(delta_x: int, delta_y: int):
       continue
 
     character.move(delta_x, delta_y)
+    moved = true
+
+  if moved:
+    apply_monster_move(hero)
 
 func _process(_delta):
   if Input.is_action_just_pressed("move_up"):

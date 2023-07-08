@@ -28,6 +28,9 @@ var grid_y = 0
 @export
 var type = TYPE.GUARD
 
+func grid_position() -> Vector2i:
+  return Vector2i(grid_x, grid_y)
+
 func move(delta_x: int, delta_y: int):
   grid_x += delta_x
   grid_y += delta_y
