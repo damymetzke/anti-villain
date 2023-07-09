@@ -21,8 +21,9 @@ const Character = preload("res://src/character.gd")
 enum TYPE {HERO = 1, VILLAIN = 2, GUARD = 3, ELITE_GUARD = 4, CAPTAIN = 5, MONSTER = 6, SPRINTER = 7, TANK = 8}
 
 var characters: Array[Character] = []
-var target = TYPE.HERO
+var controlling = TYPE.HERO
 var grid: TileMap
+var roles_reversed = false
 
 func register_character(value: Character):
   characters.push_back(value)
@@ -34,7 +35,10 @@ func reset():
   characters = []
   grid = null
 
-func apply_monster_move(hero: Character):
+func set_reversed(reversed: bool):
+  roles_reversed = reversed
+
+func apply_monster_move(target: Character):
   for character in characters:
     if not character.alive:
       continue
@@ -42,9 +46,9 @@ func apply_monster_move(hero: Character):
     if character.type != TYPE.MONSTER:
       continue
 
-    if character.grid_position() == hero.grid_position():
+    if character.grid_position() == target.grid_position():
       character.kill()
-    var path = NavigateService.navigate(character.grid_position(), hero.grid_position(), grid)
+    var path = NavigateService.navigate(character.grid_position(), target.grid_position(), grid)
 
     if len(path) < 2:
       continue
@@ -52,7 +56,7 @@ func apply_monster_move(hero: Character):
     var direction = path[1] - character.grid_position()
     character.move(direction.x, direction.y)
 
-    if character.grid_position() == hero.grid_position():
+    if character.grid_position() == target.grid_position():
       LevelService.reset()
 
 func apply_player_move(delta_x: int, delta_y: int):
@@ -70,7 +74,7 @@ func apply_player_move(delta_x: int, delta_y: int):
     if character.type == TYPE.VILLAIN:
       villain = character
 
-    if character.type != target:
+    if character.type != controlling:
       continue
 
     if not grid:
@@ -93,7 +97,10 @@ func apply_player_move(delta_x: int, delta_y: int):
     LevelService.next_level()
 
   if moved:
-    apply_monster_move(hero)
+    if roles_reversed:
+      apply_monster_move(villain)
+    else:
+      apply_monster_move(hero)
 
 func _process(_delta):
   if Input.is_action_just_pressed("move_up"):
@@ -106,7 +113,7 @@ func _process(_delta):
     apply_player_move(-1, 0)
 
   if Input.is_action_just_pressed("toggle_character"):
-    if target == TYPE.HERO:
-      target = TYPE.VILLAIN
+    if controlling == TYPE.HERO:
+      controlling = TYPE.VILLAIN
     else:
-      target = TYPE.HERO
+      controlling = TYPE.HERO

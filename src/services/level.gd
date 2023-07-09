@@ -22,13 +22,22 @@ const LEVELS = [
 ]
 
 var current = 0
+var reversed = false
 
 func reset():
+  MoveService.set_reversed(reversed)
   MoveService.reset()
   get_tree().change_scene_to_packed(LEVELS[current])
 
 func next_level():
+  if !reversed:
+    reversed = true
+    reset()
+    return
+
+  reversed = false
   current = current + 1
+
   if current >= len(LEVELS):
     print("Done!!!")
     # TODO: Figure out what to do on a win
