@@ -1,4 +1,4 @@
-# GMTK 2023 entry
+# Anti villain
 
 This is my entry to the GMTK Game Jam for 2023.
 This is the first time in a while that I'm seriously trying to do game development.
