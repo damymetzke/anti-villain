@@ -34,6 +34,7 @@ func register_grid(value: TileMap):
 func reset():
   characters = []
   grid = null
+  controlling = TYPE.HERO
 
 func set_reversed(reversed: bool):
   roles_reversed = reversed
