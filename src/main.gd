@@ -14,39 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 
-extends Node
+extends ColorRect
 
-const LEVELS = [
-  preload("res://levels/level_1.tscn"),
-  preload("res://levels/level_2.tscn"),
-]
 
-const MAIN = preload("res://levels/main.tscn")
+func _on_about_pressed():
+    pass
 
-var current = 0
-var reversed = false
 
-func begin():
-  current = 0
-  reversed = false
-  reset()
-
-func reset():
-  MoveService.set_reversed(reversed)
-  MoveService.reset()
-  get_tree().change_scene_to_packed(LEVELS[current])
-
-func next_level():
-  if !reversed:
-    reversed = true
-    reset()
-    return
-
-  reversed = false
-  current = current + 1
-
-  if current >= len(LEVELS):
-    get_tree().change_scene_to_packed(MAIN)
-    return
-
-  reset()
+func _on_play_pressed():
+    LevelService.begin()

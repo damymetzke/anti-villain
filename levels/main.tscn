@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcpo5nffgxpjt"]
+
+[ext_resource type="Script" path="res://src/main.gd" id="1_lec4w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kjp4q"]
+font_size = 49
+font_color = Color(0.921569, 0.623529, 0.286275, 1)
+
+[node name="main" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.152941, 0.207843, 0.490196, 1)
+script = ExtResource("1_lec4w")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 32.0
+offset_bottom = 112.0
+text = "Title here"
+label_settings = SubResource("LabelSettings_kjp4q")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 112.0
+offset_top = -152.0
+offset_right = 512.0
+offset_bottom = -72.0
+theme_override_font_sizes/font_size = 32
+text = "Play game"
+
+[node name="About" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -512.0
+offset_top = -152.0
+offset_right = -112.0
+offset_bottom = -72.0
+theme_override_font_sizes/font_size = 32
+text = "About"
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="About" to="." method="_on_about_pressed"]
