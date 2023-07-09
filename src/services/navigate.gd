@@ -23,7 +23,7 @@ const OFFSETS = [
   Vector2i(0, -1),
 ]
 
-func navigate(from: Vector2i, to: Vector2i, grid: TileMap):
+func navigate(from: Vector2i, to: Vector2i, grid: TileMap) -> Array:
   if from == to:
     return []
 
@@ -55,6 +55,8 @@ func navigate(from: Vector2i, to: Vector2i, grid: TileMap):
         var next_history = history.duplicate()
         next_history.push_back(possible)
         next.push_back([possible, next_history])
+
+  return []
 
 
 

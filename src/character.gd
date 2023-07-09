@@ -31,6 +31,9 @@ var type = TYPE.GUARD
 var alive = true
 
 var sprite: AnimatedSprite2D
+var animation: AnimationPlayer
+
+const SPRITE_IDLE_POSITION = Vector2(8, 0)
 
 func kill():
   alive = false
@@ -39,10 +42,30 @@ func kill():
 func grid_position() -> Vector2i:
   return Vector2i(grid_x, grid_y)
 
+func idle():
+  animation.stop()
+  sprite.play("idle")
+  var iposition = Vector2i(grid_x, grid_y)
+  position = Vector2(16 * iposition)
+  sprite.position = SPRITE_IDLE_POSITION
+
 func move(delta_x: int, delta_y: int):
+  position = Vector2(16 * grid_x, 16 * grid_y)
+
   grid_x += delta_x
   grid_y += delta_y
-  position = Vector2(grid_x * 16, grid_y * 16)
+
+  var delta = Vector2i(delta_x, delta_y)
+  var iposition = Vector2i(grid_x, grid_y)
+
+  if delta == Vector2i(-1, 0):
+    animation.seek(0)
+    animation.play("move_left")
+    sprite.play("move_left")
+    return
+    
+  position = Vector2(16 * iposition)
+
 
 func x_with_offset(delta: int) -> int:
   return grid_x + delta
@@ -52,6 +75,7 @@ func y_with_offset(delta: int) -> int:
 
 func _ready():
   sprite = get_node("Sprite")
+  animation = get_node("AnimationPlayer")
 
   move(0, 0)
   MoveService.register_character(self)
