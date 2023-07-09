@@ -18,6 +18,18 @@ extends Node
 
 const Character = preload("res://src/character.gd")
 
+const GUARD_RANGE = [
+  Vector2i(-1, -1),
+  Vector2i(0, -1),
+  Vector2i(1, -1),
+  Vector2i(-1, 0),
+  Vector2i(0, 0),
+  Vector2i(1, 0),
+  Vector2i(-1, 1),
+  Vector2i(0, 1),
+  Vector2i(1, 1),
+]
+
 enum TYPE {HERO = 1, VILLAIN = 2, GUARD = 3, ELITE_GUARD = 4, CAPTAIN = 5, MONSTER = 6, SPRINTER = 7, TANK = 8}
 
 var characters: Array[Character] = []
@@ -49,6 +61,24 @@ func apply_guard_move():
 
     character.move_patrol()
 
+    for target_character in characters:
+      if target_character.type == TYPE.GUARD:
+        continue
+
+
+      for delta in GUARD_RANGE:
+        if target_character.grid_position() == character.grid_position() + delta:
+          if !roles_reversed && target_character.type == TYPE.VILLAIN:
+            LevelService.reset()
+            return
+
+          if roles_reversed && target_character.type == TYPE.HERO:
+            LevelService.reset()
+            return
+
+          if target_character.type == TYPE.MONSTER:
+            target_character.kill()
+
 
 func apply_monster_move(target: Character):
   for character in characters:
@@ -70,6 +100,7 @@ func apply_monster_move(target: Character):
 
     if character.grid_position() == target.grid_position():
       LevelService.reset()
+      return
 
 func apply_player_move(delta_x: int, delta_y: int):
   var moved = false
