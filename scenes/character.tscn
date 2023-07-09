@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhcsraisjd3x7"]
+[gd_scene load_steps=8 format=3 uid="uid://dhcsraisjd3x7"]
 
 [ext_resource type="SpriteFrames" uid="uid://c1k17yn626yjs" path="res://spriteframes/character.tres" id="1_om0g0"]
 [ext_resource type="Script" path="res://src/character.gd" id="2_r4fj5"]
@@ -32,9 +32,99 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_shrmf"]
+resource_name = "move_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, 0), Vector2(24, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"idle"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_e345y"]
+resource_name = "move_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, 0), Vector2(8, -16)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"idle"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_lgbij"]
+resource_name = "move_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, 0), Vector2(8, 16)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"idle"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r7gb1"]
 _data = {
-"move_left": SubResource("Animation_o3fvh")
+"move_down": SubResource("Animation_lgbij"),
+"move_left": SubResource("Animation_o3fvh"),
+"move_right": SubResource("Animation_shrmf"),
+"move_up": SubResource("Animation_e345y")
 }
 
 [node name="Character" type="Node2D"]

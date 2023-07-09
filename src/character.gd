@@ -58,10 +58,21 @@ func move(delta_x: int, delta_y: int):
   var delta = Vector2i(delta_x, delta_y)
   var iposition = Vector2i(grid_x, grid_y)
 
-  if delta == Vector2i(-1, 0):
+  var direction_name = ""
+  match delta:
+      Vector2i(-1, 0):
+        direction_name = "move_left"
+      Vector2i(0, 1):
+        direction_name = "move_down"
+      Vector2i(1, 0):
+        direction_name = "move_right"
+      Vector2i(0, -1):
+        direction_name = "move_up"
+
+  if direction_name != "":
     animation.seek(0)
-    animation.play("move_left")
-    sprite.play("move_left")
+    animation.play(direction_name)
+    sprite.play(direction_name)
     return
     
   position = Vector2(16 * iposition)
