@@ -34,6 +34,7 @@ var sprite: AnimatedSprite2D
 var animation: AnimationPlayer
 
 const SPRITE_IDLE_POSITION = Vector2(8, 0)
+const ANIMATION_SPEED = 2
 
 func kill():
   alive = false
@@ -72,6 +73,8 @@ func move(delta_x: int, delta_y: int):
   if direction_name != "":
     animation.seek(0)
     animation.play(direction_name)
+    animation.speed_scale = ANIMATION_SPEED
+    sprite.speed_scale = ANIMATION_SPEED
     sprite.play(direction_name)
     return
     
