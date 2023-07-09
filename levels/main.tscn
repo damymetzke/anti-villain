@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcpo5nffgxpjt"]
+[gd_scene load_steps=4 format=3 uid="uid://bcpo5nffgxpjt"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_lec4w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kjp4q"]
 font_size = 49
 font_color = Color(0.921569, 0.623529, 0.286275, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h7yvk"]
+font_size = 26
 
 [node name="main" type="ColorRect"]
 anchors_preset = 15
@@ -21,7 +24,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_top = 32.0
 offset_bottom = 112.0
-text = "Title here"
+text = "Anti villain"
 label_settings = SubResource("LabelSettings_kjp4q")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -52,6 +55,28 @@ offset_right = -112.0
 offset_bottom = -72.0
 theme_override_font_sizes/font_size = 32
 text = "About"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 256.0
+offset_top = 128.0
+offset_right = -256.0
+offset_bottom = -152.0
+text = "  This game is far from \"done\". As you'll see, I've thought this out much better than I created. I've submitted it not because I think it's worth playing, I just made the commitment to deliver anything. So her you go! Perhaps I will coninue this game further in the future, I've seen some interesting mechanics which may be interesting once there is enough content to make it work.
+
+  You're controlling 2 characters in a theatre play: The hero and the villain. The play must end with a fight between the hero and the villain. During the story, the villain needs to be cautious of the guards, which patrol the area. And the hero needs to careful of the monsters, which are headed straight towards them. They may be able to defeat the monsters, but only if they strike first.
+  The first act has finished, but it isn't over. The hero, for whatever reason, desides to turn against the kingdom. At the same time, the villain has a change of heart. And they want to make up for the harm they have caused. It seems their roles are reversed!
+
+  Controls:
+Move hero/villain: WASD
+Swap between hero/villain: Tab
+
+When you complete a level once, the roles reverse. The hero and villain don't change position, but they interact in reverse with their enemies. The hero will be killed by the guard, and the villain will be chased by the monsters."
+label_settings = SubResource("LabelSettings_h7yvk")
+autowrap_mode = 2
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="About" to="." method="_on_about_pressed"]
