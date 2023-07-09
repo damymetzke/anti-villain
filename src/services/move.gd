@@ -39,6 +39,17 @@ func reset():
 func set_reversed(reversed: bool):
   roles_reversed = reversed
 
+func apply_guard_move():
+  for character in characters:
+    if not character.alive:
+      continue
+
+    if character.type != TYPE.GUARD:
+      continue
+
+    character.move_patrol()
+
+
 func apply_monster_move(target: Character):
   for character in characters:
     if not character.alive:
@@ -102,6 +113,8 @@ func apply_player_move(delta_x: int, delta_y: int):
       apply_monster_move(villain)
     else:
       apply_monster_move(hero)
+
+    apply_guard_move()
 
 func _process(_delta):
   if Input.is_action_just_pressed("move_up"):

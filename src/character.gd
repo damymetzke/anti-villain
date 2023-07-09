@@ -28,6 +28,11 @@ var grid_y = 0
 @export
 var type = TYPE.GUARD
 
+@export
+var patrol: Array[DIRECTION] = []
+
+var next_patrol = 0
+
 var alive = true
 
 var sprite: AnimatedSprite2D
@@ -49,6 +54,25 @@ func idle():
   var iposition = Vector2i(grid_x, grid_y)
   position = Vector2(16 * iposition)
   sprite.position = SPRITE_IDLE_POSITION
+
+func move_patrol():
+  if len(patrol) == 0:
+    return
+
+  var delta = Vector2i(0, 0)
+  match patrol[next_patrol]:
+    DIRECTION.UP:
+      delta = Vector2i(0, -1)
+    DIRECTION.RIGHT:
+      delta = Vector2i(1, 0)
+    DIRECTION.DOWN:
+      delta = Vector2i(0, 1)
+    DIRECTION.LEFT:
+      delta = Vector2i(-1, 0)
+
+  next_patrol = (next_patrol + 1) % len(patrol)
+
+  move(delta.x, delta.y)
 
 func move(delta_x: int, delta_y: int):
   position = Vector2(16 * grid_x, 16 * grid_y)
