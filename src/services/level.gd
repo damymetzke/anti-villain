@@ -17,8 +17,8 @@
 extends Node
 
 const LEVELS = [
-  preload("res://levels/gym.tscn"),
   preload("res://levels/level_1.tscn"),
+  preload("res://levels/level_2.tscn"),
 ]
 
 var current = 0
